@@ -1,21 +1,12 @@
 # AOC
 
-**TODO: Add description**
+You should be able to run the included unit tests based on the given examples by AOC by running: `mix test`.
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `aoc_2024` to your list of dependencies in `mix.exs`:
+You should be able to run each daily challenge w/ the provided input by running: `iex -S mix` and running something like:
 
 ```elixir
-def deps do
-  [
-    {:aoc_2024, "~> 0.1.0"}
-  ]
-end
+iex> AOC.day_1(input_path) # defaults to the correct path
+Part 1: ...
+Part 2: ...
+:ok
 ```
-
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/aoc_2024>.
-
