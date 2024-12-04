@@ -306,4 +306,66 @@ defmodule AOC do
 
     result
   end
+
+  def day_4(input_file \\ "day_4.txt") do
+    input =
+      @priv_dir
+      |> Path.join(input_file)
+      |> File.read!()
+
+    part_1_result = day_4_part_1(input)
+    IO.puts("Part 1: #{part_1_result}")
+
+    # part_2_result = day_4_part_1(input, "XMAS")
+    # IO.puts("Part 2: #{part_2_result}")
+  end
+
+  @doc """
+  Given an arbitrary string, search for the given word left-to-right, right-to-left,
+  top-to-bottom, bottom-to-top, and diagonally.
+
+  ASSUMPTION: the length of all lines are equal.
+
+  ## Examples
+
+  #       iex> AOC.day_4_part_1("1X3XMAS1AS", "XMAS")
+  #       1
+  #
+  #       iex> AOC.day_4_part_1("1X3XMASAMX", "XMAS")
+  #       2
+
+  """
+  def day_4_part_1(input) do
+    grid = :ets.new(:grid, [:set])
+    relevant_coords = :ets.new(:relevant_coords, [:set])
+
+    # Process the input and insert each character into an ETS table keyed by its
+    # `{x, y}` position, and keep track of relevant starting coordinates for
+    # our search.
+    input
+    |> String.split("\n")
+    |> Enum.reject(&(&1 == ""))
+    |> Enum.with_index()
+    |> Enum.map(fn {line, y} ->
+      line
+      |> String.split("")
+      |> Enum.reject(&(&1 == ""))
+      |> Enum.with_index()
+      |> Enum.each(fn {char, x} ->
+        if char == "X", do: :ets.insert(relevant_coords, {x, y})
+        :ets.insert(grid, {{x, y}, char})
+      end)
+    end)
+
+    directions = [:u, :d, :l, :r]
+
+    advance = fn
+      :u, {x, y} -> {x, y - 1}
+      :d, {x, y} -> {x, y + 1}
+      :l, {x, y} -> {x - 1, y}
+      :r, {x, y} -> {x + 1, y}
+    end
+
+    :ets.tab2list(relevant_coords)
+  end
 end
