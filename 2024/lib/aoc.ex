@@ -14,6 +14,7 @@ defmodule AOC do
   alias AOC.Days.Day_7
   alias AOC.Days.Day_8
   alias AOC.Days.Day_9
+  alias AOC.Days.Day_10
 
   def day_1(input_file \\ "day_1.txt") do
     {list_1, list_2} =
@@ -142,6 +143,19 @@ defmodule AOC do
     IO.puts("Part 1: #{part_1_result}")
 
     part_2_result = Day_9.part_2(input)
+    IO.puts("Part 2: #{part_2_result}")
+  end
+
+  def day_10(input_file \\ "day_10.txt") do
+    input =
+      @priv_dir
+      |> Path.join(input_file)
+      |> File.read!()
+
+    part_1_result = Day_10.part_1(input)
+    IO.puts("Part 1: #{part_1_result}")
+
+    part_2_result = Day_10.part_2(input)
     IO.puts("Part 2: #{part_2_result}")
   end
 end
