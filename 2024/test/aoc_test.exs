@@ -9,4 +9,5 @@ defmodule AOCTest do
   doctest AOC.Days.Day_6
   doctest AOC.Days.Day_7
   doctest AOC.Days.Day_8
+  doctest AOC.Days.Day_9
 end
